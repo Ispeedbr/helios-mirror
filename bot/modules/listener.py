@@ -228,7 +228,7 @@ class MirrorLeechListener:
             uptype = "files"
         else:
             uptype = "links"
-        msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
+        msg = f"<b>💳 Name: </b><code>{escape(name)}</code>\n\n<b>📦 Size: </b>{size}"
         if BOT_PM and FORCE_BOT_PM and not self.isPrivate:
             botpm = f"<b>\n\nHey {self.tag}!, I have sent your {uptype} in PM.</b>\n"
             buttons = ButtonMaker()
@@ -251,9 +251,9 @@ class MirrorLeechListener:
                         title='Helios-Mirror Source Link',
                         content=source_link,
                     )["path"]
-                        buttons.buildbutton(f"🔗 Source Link", f"https://graph.org/{link}")
+                        buttons.buildbutton(f"⛽ Source Link", f"https://graph.org/{link}")
                     else:
-                        buttons.buildbutton(f"🔗 Source Link", source_link)
+                        buttons.buildbutton(f"⛽ Source Link", source_link)
                 except Exception as e:
                     LOGGER.warning(e)
                 pass
@@ -267,9 +267,9 @@ class MirrorLeechListener:
                                     title='Helios-Mirror Source Link',
                                     content=source_link,
                                 )["path"]
-                                buttons.buildbutton(f"🔗 Source Link", f"https://graph.org/{link}")
+                                buttons.buildbutton(f"⛽ Source Link", f"https://graph.org/{link}")
                             else:
-                                buttons.buildbutton(f"🔗 Source Link", source_link)
+                                buttons.buildbutton(f"⛽ Source Link", source_link)
                     except Exception as e:
                         LOGGER.warning(e)
                         pass
@@ -277,7 +277,7 @@ class MirrorLeechListener:
                 b_name = bot.get_me().username
                 botstart = f"http://t.me/{b_name}"
                 buttons.buildbutton("View file in PM", f"{botstart}")
-            msg += f'\n<b>Total Files: </b>{folders}'
+            msg += f'\n<b>🗂️ Total Files: </b>{folders}'
             if typ != 0:
                 msg += f'\n<b>Corrupted Files: </b>{typ}'
             msg += f'\n<b>cc: </b>{self.tag}\n\n'
@@ -310,25 +310,25 @@ class MirrorLeechListener:
                     clean_target(self.newDir)
                 return
         else:
-            msg += f'\n\n<b>Type: </b>{typ}'
+            msg += f'\n\n<b>♻️ Type: </b>{typ}'
             if typ == "Folder":
-                msg += f'\n<b>SubFolders: </b>{folders}'
-                msg += f'\n<b>Files: </b>{files}'
+                msg += f'\n<b>🗃️ SubFolders: </b>{folders}'
+                msg += f'\n<b>🗂️ Files: </b>{files}'
             buttons = ButtonMaker()
             msg += f'\n\n<b>cc: </b>{self.tag}'
-            buttons.buildbutton("☁️ Drive Link", link)
+            buttons.buildbutton("💫 Drive Link", link)
             LOGGER.info(f'Done Uploading {name}')
             if INDEX_URL is not None:
                 url_path = rutils.quote(f'{name}')
                 share_url = f'{INDEX_URL}/{url_path}'
                 if typ == "Folder":
                     share_url += '/'
-                    buttons.buildbutton("⚡ Index Link", share_url)
+                    buttons.buildbutton("📇 Index Link", share_url)
                 else:
-                    buttons.buildbutton("⚡ Index Link", share_url)
+                    buttons.buildbutton("📇 Index Link", share_url)
                     if VIEW_LINK:
                         share_urls = f'{INDEX_URL}/{url_path}?a=view'
-                        buttons.buildbutton("🌐 View Link", share_urls)
+                        buttons.buildbutton("🎞️ View Link", share_urls)
                     if SOURCE_LINK is True:
                         try:
                             mesg = message_args[1]
@@ -337,13 +337,13 @@ class MirrorLeechListener:
                                     title='Helios-Mirror Source Link',
                                     content=mesg,
                                 )["path"]
-                                buttons.buildbutton(f"🔗 Source Link", f"https://graph.org/{link}")
+                                buttons.buildbutton(f"⛽ Source Link", f"https://graph.org/{link}")
                             elif is_url(mesg):
                                 source_link = mesg
                                 if source_link.startswith(("|", "pswd: ")):
                                     pass
                                 else:
-                                    buttons.buildbutton(f"🔗 Source Link", source_link)
+                                    buttons.buildbutton(f"⛽ Source Link", source_link)
                             else:
                                 pass
                         except Exception as e:
@@ -359,9 +359,9 @@ class MirrorLeechListener:
                                         title='Helios-Mirror Source Link',
                                         content=source_link,
                                     )["path"]
-                                    buttons.buildbutton(f"🔗 Source Link", f"https://graph.org/{link}")
+                                    buttons.buildbutton(f"⛽ Source Link", f"https://graph.org/{link}")
                                 else:
-                                    buttons.buildbutton(f"🔗 Source Link", source_link)
+                                    buttons.buildbutton(f"⛽ Source Link", source_link)
                         except Exception as e:
                             LOGGER.warning(e)
                             pass
