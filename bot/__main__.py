@@ -37,18 +37,18 @@ def stats(update, context):
     mem_t = get_readable_file_size(memory.total)
     mem_a = get_readable_file_size(memory.available)
     mem_u = get_readable_file_size(memory.used)
-    stats = f'<b>Commit Date:</b> {last_commit}\n\n'\
-            f'<b>Bot Uptime:</b> {currentTime}\n\n'\
-            f'<b>Total Disk Space:</b> {total}\n'\
-            f'<b>Used:</b> {used} | <b>Free:</b> {free}\n\n'\
-            f'<b>Up:</b> {sent} | '\
-            f'<b>Down:</b> {recv}\n\n'\
-            f'<b>CPU:</b> {cpuUsage}% | '\
-            f'<b>RAM:</b> {mem_p}% | '\
-            f'<b>DISK:</b> {disk}%\n\n'\
-            f'<b>Total Memory:</b> {mem_t}\n'\
-            f'<b>Free:</b> {mem_a} | '\
-            f'<b>Used:</b> {mem_u}\n\n'
+    stats = f'<b>📆 Commit Date:</b> {last_commit}\n\n'\
+            f'<b>🤖 Bot Uptime:</b> {currentTime}\n\n'\
+            f'<b>💾 Total Disk Space:</b> {total}\n'\
+            f'<b>💯 Used:</b> {used} | <b>🆓 Free:</b> {free}\n\n'\
+            f'<b>🔺 Up:</b> {sent} | '\
+            f'<b>🔻 Down:</b> {recv}\n\n'\
+            f'<b>💻 CPU:</b> {cpuUsage}% | '\
+            f'<b>🎮 RAM:</b> {mem_p}% | '\
+            f'<b>💿 DISK:</b> {disk}%\n\n'\
+            f'<b>📟 Total Memory:</b> {mem_t}\n'\
+            f'<b>🆓 Free:</b> {mem_a} | '\
+            f'<b>💯 Used:</b> {mem_u}\n\n'
     sendMessage(stats, context.bot, update.message)
 
 
@@ -67,7 +67,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         sendMarkup('Not an Authorized user, deploy your own helios-mirror-leech bot', context.bot, update.message, reply_markup)
 
 def restart(update, context):
-    restart_message = sendMessage("Restarting...", context.bot, update.message)
+    restart_message = sendMessage("Bot Eating Pizza 🍕", context.bot, update.message)
     if Interval:
         Interval[0].cancel()
         Interval.clear()
@@ -83,9 +83,9 @@ def restart(update, context):
 
 def ping(update, context):
     start_time = int(round(time() * 1000))
-    reply = sendMessage("Starting Ping", context.bot, update.message)
+    reply = sendMessage("Starting Ping 🥎", context.bot, update.message)
     end_time = int(round(time() * 1000))
-    editMessage(f'{end_time - start_time} ms', reply)
+    editMessage(f'{end_time - start_time} ms 🏏', reply)
 
 
 def log(update, context):
@@ -153,7 +153,7 @@ Hei, Need Help!!
 '''
 try:
     help = telegraph.create_page(
-        title='Helios-Mirror Help',
+        title='Mirror Help',
         content=help_string_telegraph,
     )["path"]
 except Exception as err:
@@ -173,15 +173,15 @@ def main():
                 if ospath.isfile(".restartmsg"):
                     with open(".restartmsg") as f:
                         chat_id, msg_id = map(int, f)
-                    msg = 'Restarted Successfully!'
+                    msg = 'Bot Eating Pizaa 🍕'
                 else:
-                    msg = 'Bot Restarted!'
+                    msg = 'Bot Finish 🍕'
                 for tag, links in data.items():
                      msg += f"\n\n{tag}: "
                      for index, link in enumerate(links, start=1):
                          msg += f" <a href='{link}'>{index}</a> |"
                          if len(msg.encode()) > 4000:
-                             if 'Restarted Successfully!' in msg and cid == chat_id:
+                             if 'Bot Finish 🍕' in msg and cid == chat_id:
                                  bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
                                  osremove(".restartmsg")
                              else:
@@ -190,7 +190,7 @@ def main():
                                  except Exception as e:
                                      LOGGER.error(e)
                              msg = ''
-                if 'Restarted Successfully!' in msg and cid == chat_id:
+                if 'Bot Finish 🍕' in msg and cid == chat_id:
                      bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
                      osremove(".restartmsg")
                 else:
@@ -202,12 +202,12 @@ def main():
     if ospath.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        bot.edit_message_text("Restarted Successfully!", chat_id, msg_id)
+        bot.edit_message_text("Bot Finish 🍕", chat_id, msg_id)
         osremove(".restartmsg")
     elif not notifier_dict and AUTHORIZED_CHATS:
         for id_ in AUTHORIZED_CHATS:
             try:
-                bot.sendMessage(id_, "Bot Restarted!", 'HTML')
+                bot.sendMessage(id_, "Bot Finish 🍕", 'HTML')
             except Exception as e:
                 LOGGER.error(e)
 
@@ -228,7 +228,7 @@ def main():
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
     updater.start_polling(drop_pending_updates=IGNORE_PENDING_REQUESTS)
-    LOGGER.info("Bot Started!")
+    LOGGER.info("Bot Started 💥")
     signal(SIGINT, exit_clean_up)
 
 app.start()
