@@ -67,7 +67,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         sendMarkup('Not an Authorized user, deploy your own helios-mirror-leech bot', context.bot, update.message, reply_markup)
 
 def restart(update, context):
-    restart_message = sendMessage("Bot Eating Pizza 🍕", context.bot, update.message)
+    restart_message = sendMessage("Restarting......", context.bot, update.message)
     if Interval:
         Interval[0].cancel()
         Interval.clear()
@@ -83,9 +83,9 @@ def restart(update, context):
 
 def ping(update, context):
     start_time = int(round(time() * 1000))
-    reply = sendMessage("Starting Ping 🥎", context.bot, update.message)
+    reply = sendMessage("Starting Ping 💥", context.bot, update.message)
     end_time = int(round(time() * 1000))
-    editMessage(f'{end_time - start_time} ms 🏏', reply)
+    editMessage(f'{end_time - start_time} ms 💜', reply)
 
 
 def log(update, context):
@@ -173,15 +173,15 @@ def main():
                 if ospath.isfile(".restartmsg"):
                     with open(".restartmsg") as f:
                         chat_id, msg_id = map(int, f)
-                    msg = 'Bot Eating Pizaa 🍕'
+                    msg = 'Restart Successful!'
                 else:
-                    msg = 'Bot Finish 🍕'
+                    msg = 'Restart Successful!'
                 for tag, links in data.items():
                      msg += f"\n\n{tag}: "
                      for index, link in enumerate(links, start=1):
                          msg += f" <a href='{link}'>{index}</a> |"
                          if len(msg.encode()) > 4000:
-                             if 'Bot Finish 🍕' in msg and cid == chat_id:
+                             if 'Restart Successful!' in msg and cid == chat_id:
                                  bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
                                  osremove(".restartmsg")
                              else:
@@ -190,7 +190,7 @@ def main():
                                  except Exception as e:
                                      LOGGER.error(e)
                              msg = ''
-                if 'Bot Finish 🍕' in msg and cid == chat_id:
+                if 'Restart Successful!' in msg and cid == chat_id:
                      bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
                      osremove(".restartmsg")
                 else:
@@ -202,12 +202,12 @@ def main():
     if ospath.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        bot.edit_message_text("Bot Finish 🍕", chat_id, msg_id)
+        bot.edit_message_text("Restart Successful!", chat_id, msg_id)
         osremove(".restartmsg")
     elif not notifier_dict and AUTHORIZED_CHATS:
         for id_ in AUTHORIZED_CHATS:
             try:
-                bot.sendMessage(id_, "Bot Finish 🍕", 'HTML')
+                bot.sendMessage(id_, "Restart Successful!", 'HTML')
             except Exception as e:
                 LOGGER.error(e)
 
